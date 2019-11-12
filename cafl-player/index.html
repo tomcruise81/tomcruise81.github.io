@@ -140,7 +140,8 @@
             console.log(`Selected preset ${selectedPreset.text}`);
             const frequencies = selectedPreset.value.split(',');
             preset_frequencies.value = frequencies;
-            notes.value = selectedPreset.note;
+            const noteValue = selectedPreset.getAttributeNode("note").value;
+            notes.value = (noteValue) ? noteValue : "";
         }
     });
 
