@@ -131,7 +131,8 @@
 
     presets.addEventListener('change', function() {
         stop.dispatchEvent(new Event('click'));
-        const selectedPreset =  presets.options[presets.selectedIndex];
+        const selectedIndex = (presets.selectedIndex >= 0) ? presets.selectedIndex : 0;
+        const selectedPreset = presets.options[selectedIndex];
         console.log(`Selected preset ${selectedPreset.text}`);
         const frequencies = selectedPreset.value.split(',');
         preset_frequencies.value = frequencies;
