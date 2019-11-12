@@ -1551,5 +1551,5 @@
 {"program":"Yersenia Pestis", "note": "Aka Bubonic plague; spread primarily by fleas on rats ", "frequencies": [5120,5000,1600,512,508,504,500,496,492,338,333,210,216,160]},
 {"program":"Yersenia Pestis 1", "note": null, "frequencies": [337.6]},
 {"program":"Zearalenone HC", "note": null, "frequencies": [4978.71,247.88]},
-{"program":"Zygomycosis", "note": "Also called mucormycosis; a serious fungal infection usually associated with uncontrolled diabetes mellitus or immunosuppressive drugs", "frequencies": [942,623,73]},
+{"program":"Zygomycosis", "note": "Also called mucormycosis; a serious fungal infection usually associated with uncontrolled diabetes mellitus or immunosuppressive drugs", "frequencies": [942,623,73]}
 ]
