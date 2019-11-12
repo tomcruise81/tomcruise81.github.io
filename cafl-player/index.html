@@ -140,6 +140,7 @@
             console.log(`Selected preset ${selectedPreset.text}`);
             const frequencies = selectedPreset.value.split(',');
             preset_frequencies.value = frequencies;
+            notes.value = selectedPreset.note;
         }
     });
 
@@ -171,7 +172,7 @@
                         let option = document.createElement("option");
                         option.value = presetValue.frequencies;
                         option.innerHTML = presetValue.program;
-                        notes.value = (presetValue.note) ? presetValue.note : "";
+                        option.setAttribute("note", (presetValue.note) ? presetValue.note : "");
 
                         // then append it to the select element
                         presets.appendChild(option);
