@@ -142,6 +142,9 @@
 
     seconds.addEventListener('change', function() {
         stop.dispatchEvent(new Event('click'));
+    });
+    
+    seconds.addEventListener('input', function() {
         seconds_value.value = seconds.value;
     });
 
