@@ -1068,7 +1068,7 @@
 {"program":"Papilloma Kidney", "note": "Small, usually benign growth on a kidney", "frequencies": [110,148,264,634,767,848,917,760,762,1102]},
 {"program":"Papilloma Virus", "note": "Causes warts and benign tumors having a branch or stalk and in some cases white patches known as leukoplakia, 874*, 907*", "frequencies": [67265,64734,16970,9609,9258,5657,1051,1011,907,874,767,489,466,404,265,110,45]},
 {"program":"Papilloma Virus Cervix HC", "note": "Smear", "frequencies": [20128.91,1002.16]},
-{"program":"Papilloma Virus Plantar Wart HC", "note": null, "frequencies": [20163.76,1003.]},
+{"program":"Papilloma Virus Plantar Wart HC", "note": null, "frequencies": [20163.76,1003]},
 {"program":"Papilloma Virus Wart HC", "note": null, "frequencies": [20263.34,1008.85]},
 {"program":"Paraceli", "note": null, "frequencies": [232]},
 {"program":"Paradontose", "note": null, "frequencies": [424,1552]},
