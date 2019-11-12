@@ -172,7 +172,10 @@
                         let option = document.createElement("option");
                         option.value = presetValue.frequencies;
                         option.innerHTML = presetValue.program;
-                        option.setAttribute("note", (presetValue.note) ? presetValue.note : "");
+                        
+                        let noteAttribute = document.createAttribute("note");
+                        noteAttribute.value = (presetValue.note) ? presetValue.note : "";
+                        option.setAttributeNode(noteAttribute);
 
                         // then append it to the select element
                         presets.appendChild(option);
