@@ -148,8 +148,6 @@
     function initializeCanvas() {
         canvas.height = 0.75 * window.innerHeight;
         canvas.width = window.innerWidth;
-        presets.dispatchEvent(new Event('change'));
-        seconds.dispatchEvent(new Event('change'));
     }
 
     function initializePresets() {
@@ -167,6 +165,8 @@
                         presets.appendChild(option);
                     }
                 });
+                presets.dispatchEvent(new Event('change'));
+                seconds.dispatchEvent(new Event('change'));
             }
         };
         xhttp.open("GET", "cafl.json", true);
