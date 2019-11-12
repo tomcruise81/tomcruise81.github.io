@@ -9,6 +9,7 @@
     <label for="seconds-value">Seconds</label>
     <br />
     <input id="preset-frequencies" type="text" disabled="true" size="100" />
+    <input id="notes" type="text" disabled="true" size="100" />
 </div>
 <script>
     const canvas = document.getElementById('canvas');
@@ -16,6 +17,7 @@
     const presets = document.getElementById('presets');
     const seconds = document.getElementById('seconds');
     const seconds_value = document.getElementById('seconds-value');
+    const notes = document.getElementById('notes');
     const play = document.getElementById('play');
     const stop = document.getElementById('stop');
     const preset_frequencies = document.getElementById('preset-frequencies');
@@ -168,6 +170,7 @@
                         let option = document.createElement("option");
                         option.value = presetValue.frequencies;
                         option.innerHTML = presetValue.program;
+                        notes.value = (presetValue.note) ? presetValue.note : "";
 
                         // then append it to the select element
                         presets.appendChild(option);
