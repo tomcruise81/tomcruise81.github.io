@@ -1,9 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <canvas id="canvas" width="100" height="100" class="playable-canvas"></canvas>
 <div class="playable-buttons">
-    <select id="presets">
-        <option>Loading...</option>
-    </select>
+    <select id="presets" />
     <input id="play" type="button" value="Play" />
     <input id="stop" type="button" value="Stop" />
     <input id="seconds" type="range" min="1" max="600" value="180" />
@@ -153,6 +151,11 @@
     }
 
     function initializePresets() {
+        let option = document.createElement("option");
+        option.innerHTML = option.value = "Loading...";
+        // then append it to the select element
+        presets.appendChild(option);
+        
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -160,7 +163,7 @@
                 presets.removeChild(presets.childNodes[0]); 
                 presetValues.forEach(presetValue => {
                     if (presetValue.frequencies.length > 0) {
-                        let option = document.createElement("option");
+                        option = document.createElement("option");
                         option.value = presetValue.frequencies;
                         option.innerHTML = presetValue.program;
 
@@ -175,9 +178,7 @@
         xhttp.open("GET", "cafl.json", true);
         xhttp.send();
     }
-    
-    // textarea.addEventListener('input', drawCanvas);
+
     window.addEventListener('load', initializeCanvas);
     window.addEventListener('load', initializePresets);
-    // window.addEventListener('load', initializeAudio);
 </script>
