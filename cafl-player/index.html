@@ -133,9 +133,11 @@
         stop.dispatchEvent(new Event('click'));
         const selectedIndex = (presets.selectedIndex >= 0) ? presets.selectedIndex : 0;
         const selectedPreset = presets.options[selectedIndex];
-        console.log(`Selected preset ${selectedPreset.text}`);
-        const frequencies = selectedPreset.value.split(',');
-        preset_frequencies.value = frequencies;
+        if (selectedPreset) {
+            console.log(`Selected preset ${selectedPreset.text}`);
+            const frequencies = selectedPreset.value.split(',');
+            preset_frequencies.value = frequencies;
+        }
     });
 
     seconds.addEventListener('change', function() {
