@@ -175,7 +175,7 @@
                 });
                 loadingOption.remove();
                 presets.dispatchEvent(new Event('change'));
-                seconds.dispatchEvent(new Event('change'));
+                seconds.dispatchEvent(new Event('input'));
             }
         };
         xhttp.open("GET", "cafl.json", true);
