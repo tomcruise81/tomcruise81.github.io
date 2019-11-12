@@ -151,19 +151,18 @@
     }
 
     function initializePresets() {
-        let option = document.createElement("option");
-        option.innerHTML = option.value = "Loading...";
+        const loadingOption = document.createElement("option");
+        loadingOption.innerHTML = option.value = "Loading...";
         // then append it to the select element
-        presets.appendChild(option);
+        presets.appendChild(loadingOption);
         
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const presetValues = JSON.parse(this.responseText);
-                presets.removeChild(presets.childNodes[0]); 
                 presetValues.forEach(presetValue => {
                     if (presetValue.frequencies.length > 0) {
-                        option = document.createElement("option");
+                        let option = document.createElement("option");
                         option.value = presetValue.frequencies;
                         option.innerHTML = presetValue.program;
 
@@ -171,6 +170,7 @@
                         presets.appendChild(option);
                     }
                 });
+                loadingOption.remove();
                 presets.dispatchEvent(new Event('change'));
                 seconds.dispatchEvent(new Event('change'));
             }
