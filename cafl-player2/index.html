@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="utils.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="100" height="100" class="playable-canvas"></canvas>
+    <select id="presets"></select>
+    <input id="play" type="button" value="Play" />
+    <input id="stop" type="button" value="Stop" />
+    <input id="seconds" type="range" min="1" max="600" value="180" />
+    <input id="seconds-value" type="text" disabled="true" size="4" />
+    <input id="elapsed-value" type="text" disabled="true" size="4" />
+    <input id="remaining-value" type="text" disabled="true" size="4" />
+    <input id="total-value" type="text" disabled="true" hidden="true" size="4" />
+    <br />
+    <input id="preset-frequencies" type="text" disabled="true" size="100" />
+    <br />
+    <input id="comments" type="text" disabled="true" size="100" />
+    </div>
+    <script src="frequencies.js"></script>
+  </body>
+</html>
