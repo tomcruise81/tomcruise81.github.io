@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+      * {
+        font-family: 'Roboto', sans-serif;
+      }
+      .mono {
+        font-family: 'Roboto Mono', monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas" width="100" height="100" class="playable-canvas"></canvas>
+    <div class="playable-buttons">
+      <!-- width is necessary for SingleSelection to ensure it uses space -->
+      <select id="presets" style="width:20%">
+        <!-- Necessary for SingleSelection to ensure it uses space -->
+        <option></option>
+      </select>
+      <input id="play" type="button" value="Play" />
+      <input id="stop" type="button" value="Stop" />
+      <input id="seconds" type="range" title="Frequency Duration Slider" min="1" max="600" value="180" />
+      <input id="seconds-value" type="text" title="Frequency Duration" disabled="true" size="4" class="mono" />
+      <input id="elapsed-value" type="text" title="Elapsed Time" disabled="true" size="4" class="mono" />
+      <input id="remaining-value" type="text" title="Remaining Time" disabled="true" size="4" class="mono" />
+      <br />
+      <input id="preset-frequencies" type="text" title="Frequency List" disabled="true" size="100" />
+      <br />
+      <input id="comments" type="text" title="Comments" disabled="true" size="100" />
+    </div>
+    <script src="frequencies.js"></script>
+  </body>
+</html>
