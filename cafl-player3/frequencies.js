@@ -75,6 +75,7 @@ function terminateAudio() {
     try {
       audioCtx.close();
     } catch (err) {
+      console.error('Error closing audioCtx');
       console.error(err);
     }
   }
@@ -83,6 +84,7 @@ function terminateAudio() {
       oscillator.stop(0);
       oscillator = undefined;
     } catch (err) {
+      console.error('Error stopping oscillator');
       console.error(err);
     }
   }
