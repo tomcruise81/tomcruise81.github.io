@@ -32,7 +32,7 @@ function drawCanvas() {
   canvasCtx.fillStyle = "gray";
   canvasCtx.textAlign = "center";
   canvasCtx.textBaseline = "middle";
-  canvasCtx.font = "10vw Arial";
+  canvasCtx.font = "10vw Roboto";
   canvasCtx.fillText(
     `${currentFrequency}`,
     canvas.width / 2,
@@ -134,12 +134,12 @@ $('#play').on("click", function() {
 $('#stop').on("click", function() {
   if (audioCtx) {
     try {
-      audioCtx.pause();
+      audioCtx.suspend();
     } catch {}
   }
   if (oscillator) {
     try {
-      oscillator.stop();
+      oscillator.stop(0);
     } catch {}
   }
   while (timeouts.length) {
