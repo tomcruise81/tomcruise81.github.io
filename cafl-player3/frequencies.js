@@ -73,7 +73,7 @@ function drawCanvas() {
 function terminateAudio() {
   if (audioCtx) {
     try {
-      audioCtx.suspend();
+      audioCtx.close();
     } catch (err) {
       console.error(err);
     }
