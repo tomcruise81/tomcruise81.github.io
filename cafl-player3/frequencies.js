@@ -19,7 +19,6 @@ let caflData;
 let totalTime;
 
 function drawClearCanvas() {
-  console.log("drawClearCanvas");
   if (analyser) {
     return;
   }
@@ -30,7 +29,6 @@ function drawClearCanvas() {
 }
 
 function drawCanvas() {
-  console.log("drawCanvas");
   if (!analyser) {
     return;
   }
@@ -73,24 +71,26 @@ function drawCanvas() {
 }
 
 function terminateAudio() {
-  console.log("terminateAudio");
   if (audioCtx) {
     try {
       audioCtx.suspend();
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
   }
   if (oscillator) {
     try {
       oscillator.stop(0);
       oscillator = undefined;
-    } catch {}
+    } catch (err) {
+      console.error(err);
+    }
   }
   audioCtx = undefined;
   analyser = undefined;
 }
 
 function initializeAudio() {
-  console.log("initializeAudio");
   terminateAudio();
 
   // create web audio api context
@@ -173,7 +173,6 @@ function playClick() {
 $('#play').on("click", playClick);
 
 function stopClick() {
-  console.log("stopClick");
   terminateAudio();
 
   drawClearCanvas();
