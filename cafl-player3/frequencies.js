@@ -100,7 +100,9 @@ function initializeAudio() {
 
   // create web audio api context
   audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-  console.log(`Audio Context State: ${audioCtx.state}`);
+  audioCtx.onstatechange = function() {
+    console.log(audioCtx.state);
+  };
   analyser = audioCtx.createAnalyser();
 
   // create Oscillator node
