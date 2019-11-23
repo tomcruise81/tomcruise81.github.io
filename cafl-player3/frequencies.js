@@ -73,13 +73,12 @@ function drawCanvas() {
 function terminateAudio() {
   if (oscillator) {
     try {
-        oscillator.onended = undefined;
-        oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
-        oscillator.stop();
-      } catch (err) {
-        console.error('Error cancelling oscillator scheduled values');
-        console.error(err);
-      }
+      oscillator.onended = undefined;
+      oscillator.stop();
+    } catch (err) {
+      console.error('Error stopping oscillator');
+      console.error(err);
+    }
   }
 
   oscillator = undefined;
