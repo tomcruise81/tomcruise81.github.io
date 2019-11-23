@@ -19,24 +19,25 @@
   </head>
   <body>
     <canvas id="canvas" width="100" height="100" class="playable-canvas"></canvas>
-    <div class="playable-buttons">
+    <div class="playable-buttons" style="float:left;">
       <input id="play" type="button" value="Play" />
       <input id="stop" type="button" value="Stop" />
       <label for="repeat">Repeat:</label>
       <input id="repeat" type="checkbox" title="Repeat" />
       <input id="seconds" type="range" title="Frequency Duration Slider" min="1" max="600" value="180" />
       <input id="seconds-value" type="text" title="Frequency Duration" disabled="true" size="5" class="mono" />
+    </div>
+    <div class="status-info" style="float:right;">
       <input id="elapsed-value" type="text" title="Elapsed Time" disabled="true" size="8" class="mono" />
       <input id="remaining-value" type="text" title="Remaining Time" disabled="true" size="8" class="mono" />
-      <br />
+    </div>
+    <div class="preset-information">
       <!-- width is necessary for SingleSelection to ensure it uses space -->
       <select id="presets" style="width:100%" multiple="multiple">
         <!-- Necessary for SingleSelection to ensure it uses space -->
         <option></option>
       </select>
-      <br />
       <input id="preset-frequencies" type="text" title="Frequency List" disabled="true" style="width:100%" />
-      <br />
       <input id="comments" type="text" title="Comments" disabled="true" style="width:100%" />
     </div>
     <script src="frequencies.js"></script>

@@ -71,24 +71,11 @@ function drawCanvas() {
 }
 
 function terminateAudio() {
-  // if (audioCtx) {
-  //   try {
-  //     audioCtx.close();
-  //   } catch (err) {
-  //     console.error('Error closing audioCtx');
-  //     console.error(err);
-  //   }
-  // }
-
-  if (audioCtx) {
-   console.log(`Audio Context State: ${audioCtx.state}`);
-  }
-
   if (oscillator) {
     try {
         oscillator.onended = undefined;
-        oscillator.stop();
         oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
+        oscillator.stop();
       } catch (err) {
         console.error('Error cancelling oscillator scheduled values');
         console.error(err);
@@ -97,6 +84,7 @@ function terminateAudio() {
 
   oscillator = undefined;
   analyser = undefined;
+  // WARNING: Don't terminate the audioCtx, since doing so prevents repeats and requires a new button click
   // audioCtx = undefined;
 }
 
@@ -125,9 +113,11 @@ function indicateFrequency(frequency, secondsFromNow) {
 
 function displayTimer() {
   if (totalTime && audioCtx.currentTime && audioCtx.currentTime > 0) {
-    const currentTimeMs = audioCtx.currentTime * 1000;
+    const currentTimeMs = new Date().getTime() - playClickedTimeMs;
+    let remainingTime = totalTime - Math.abs(currentTimeMs % totalTime);
+    remainingTime = $('#repeat').is(":checked") ? '∞' : msToTime(remainingTime, true);
     $('#elapsed-value').val(msToTime(currentTimeMs, true));
-    $('#remaining-value').val(msToTime(totalTime - currentTimeMs, true));
+    $('#remaining-value').val(remainingTime);
   } else {
     $('#elapsed-value').val('');
     $('#remaining-value').val('');
@@ -177,13 +167,19 @@ function playClick() {
     }
   };
 
-  totalTime = startOfNextFrequencyViaAudioCtx * 1000;
+  totalTime = startOfNextFrequencyFromNow * 1000;
 
   oscillator.start();
   oscillator.stop(startOfNextFrequencyViaAudioCtx);
   drawCanvas();
 }
-$('#play').on("click", playClick);
+
+let playClickedTimeMs = 0;
+
+$('#play').on("click", () => {
+  playClickedTimeMs = new Date().getTime();
+  playClick();
+});
 
 function stopClick() {
   terminateAudio();
