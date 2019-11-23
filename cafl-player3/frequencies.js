@@ -73,7 +73,7 @@ function drawCanvas() {
 function terminateAudio() {
   if (oscillator) {
     try {
-      oscillator.onended = undefined;
+      oscillator.onended = function(){};
       // oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
       console.log(`Audio Context State: ${audioCtx.state}`);
       console.log('Stopping oscillator');
