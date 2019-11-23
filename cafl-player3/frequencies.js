@@ -75,13 +75,13 @@ function terminateAudio() {
     try {
       oscillator.onended = function(){};
       // oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
-      console.log(`Audio Context State: ${audioCtx.state}`);
-      console.log('Stopping oscillator');
+      // console.log(`Audio Context State: ${audioCtx.state}`);
+      // console.log('Stopping oscillator');
       oscillator.stop(0);
     } catch (err) {
-      console.error('Error cleaning up oscillator');
-      console.error(err);
-      console.error(err.stack);
+      // console.error('Error cleaning up oscillator');
+      // console.error(err);
+      // console.error(err.stack);
     }
   }
 
@@ -199,7 +199,11 @@ function stopClick() {
   $('#remaining-value').val('');
   totalTime = undefined;
 }
-$('#stop').on("click", stopClick);
+$('#stop').on("click", () => {
+  stopClick();
+  audioCtx.close();
+  audioCtx = undefined;
+});
 
 $('#presets').on("change", function() {
   stopClick();
