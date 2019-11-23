@@ -79,11 +79,13 @@ function terminateAudio() {
       } catch (err) {
         console.error('Error cancelling oscillator scheduled values');
         console.error(err);
+        console.error(err.stack);
       }
       oscillator.stop();
     } catch (err) {
       console.error('Error stopping oscillator');
       console.error(err);
+      console.error(err.stack);
     }
   }
 
