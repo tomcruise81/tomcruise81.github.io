@@ -183,6 +183,11 @@ let playClickedTimeMs = 0;
 
 $('#play').on("click", () => {
   playClickedTimeMs = new Date().getTime();
+  stopClick();
+  if (audioCtx) {
+    audioCtx.close();
+    audioCtx = undefined;
+  }
   playClick();
 });
 
@@ -278,6 +283,21 @@ function initializePresets() {
         cache: true
     }).done(function(data) {
         caflData = data;
+        function formatPreset(preset) {
+          if (!preset.id) {
+            return preset.text;
+          }
+          const program = caflData.programs[preset.text];
+          var $preset = $(
+            `<div>
+              <span style="font-weight:bold;">${preset.text}</span><br />
+              <span style="font-size:90%"><span style="font-weight:bold;">Frequencies:</span>&nbsp;<span>${(program.frequencies) ? program.frequencies.join(',') : 'None'}</span></span><br />
+              <span style="font-size:90%"><span style="font-weight:bold;">Comments:</span>&nbsp;<span>${(program.comments) ? program.comments : 'None'}</span></span>
+            </div>`
+          );
+          return $preset;
+        }
+
         $('#presets').select2({
             data: function() {
                 return Object.entries(caflData.programs).map((value, index) => {
@@ -291,7 +311,8 @@ function initializePresets() {
             width: 'resolve',
             dropdownAutoWidth: true,
             placeholder: 'Presets',
-            allowClear: true
+            // allowClear: true,
+            templateResult: formatPreset
         });
 
         $('#presets').change();
