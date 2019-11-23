@@ -191,7 +191,7 @@ function msToTime(ms, includeHrs, includeMs) {
 }
 
 $('#repeat').on("change", function() {
-  document.cookie = `repeat=${$('#repeat').is(":checked")}`;
+  document.cookie = `repeat=${$('#repeat').is(":checked") ? 'true' : 'false'}`;
 });
 
 $('#seconds').on("change", function() {
@@ -253,8 +253,8 @@ function initializeSeconds() {
 
 function initializeRepeat() {
   const repeatCookieValue = getCookieValue("repeat");
-  if (repeatCookieValue) {
-    $('#repeat').prop( "checked", true );
+  if (repeatCookieValue === 'true') {
+    $('#repeat').prop("checked", true);
   }
 }
 
