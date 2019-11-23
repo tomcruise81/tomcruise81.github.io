@@ -120,8 +120,11 @@ $('#play').on("click", function() {
 
   oscillator.onended = function() {
     console.log("onEnded event signled");
+    $('#stop').trigger("click");
     oscillator = undefined;
-    stop.dispatchEvent(new Event("click"));
+    if ($('#repeat').is(":checked")) {
+      $('#play').trigger("click");
+    }
   };
 
   totalTime = startOfNextFrequency * 1000;
