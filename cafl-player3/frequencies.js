@@ -79,6 +79,7 @@ function terminateAudio() {
       console.error(err);
     }
   }
+
   oscillator = undefined;
   audioCtx = undefined;
   analyser = undefined;
