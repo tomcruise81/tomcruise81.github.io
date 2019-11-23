@@ -75,7 +75,8 @@ function terminateAudio() {
     try {
       oscillator.onended = undefined;
       // oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
-
+      console.log(`Audio Context State: ${audioCtx.state}`);
+      console.log('Stopping oscillator');
       oscillator.stop(0);
     } catch (err) {
       console.error('Error cleaning up oscillator');
@@ -96,7 +97,7 @@ function initializeAudio() {
   // create web audio api context
   audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
   audioCtx.onstatechange = function() {
-    console.log(audioCtx.state);
+    console.log(`Audio Context State: ${audioCtx.state}`);
   };
   analyser = audioCtx.createAnalyser();
 
