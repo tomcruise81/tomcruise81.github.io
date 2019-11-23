@@ -79,15 +79,7 @@ function terminateAudio() {
       console.error(err);
     }
   }
-  if (oscillator) {
-    try {
-      oscillator.stop(0);
-      oscillator = undefined;
-    } catch (err) {
-      console.error('Error stopping oscillator');
-      console.error(err);
-    }
-  }
+  oscillator = undefined;
   audioCtx = undefined;
   analyser = undefined;
 }
