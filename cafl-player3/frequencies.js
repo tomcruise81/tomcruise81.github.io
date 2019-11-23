@@ -71,25 +71,41 @@ function drawCanvas() {
 }
 
 function terminateAudio() {
+  // if (audioCtx) {
+  //   try {
+  //     audioCtx.close();
+  //   } catch (err) {
+  //     console.error('Error closing audioCtx');
+  //     console.error(err);
+  //   }
+  // }
+
   if (audioCtx) {
+   console.log(`Audio Context State: ${audioCtx.state}`);
+  }
+
+  if (oscillator) {
     try {
-      audioCtx.close();
-    } catch (err) {
-      console.error('Error closing audioCtx');
-      console.error(err);
-    }
+        oscillator.onended = undefined;
+        oscillator.stop();
+        oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
+      } catch (err) {
+        console.error('Error cancelling oscillator scheduled values');
+        console.error(err);
+      }
   }
 
   oscillator = undefined;
-  audioCtx = undefined;
   analyser = undefined;
+  // audioCtx = undefined;
 }
 
 function initializeAudio() {
   terminateAudio();
 
   // create web audio api context
-  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+  console.log(`Audio Context State: ${audioCtx.state}`);
   analyser = audioCtx.createAnalyser();
 
   // create Oscillator node
@@ -129,7 +145,8 @@ function playClick() {
 
   oscillator.type = caflData.defaults.waveform;
   const secondsValue = parseInt($('#seconds').val());
-  let startOfNextFrequency = audioCtx.currentTime;
+  let startOfNextFrequencyViaAudioCtx = audioCtx.currentTime;
+  let startOfNextFrequencyFromNow = 0;
 
   const selectedPresets = $("#presets option:selected").map((index, option) => {
     return option.text;
@@ -138,9 +155,10 @@ function playClick() {
     const selectedProgram = caflData.programs[selectedPresetText];
     const frequencies = selectedProgram.frequencies;
     for (let frequency of frequencies) {
-      oscillator.frequency.setValueAtTime(frequency, startOfNextFrequency);
-      indicateFrequency(frequency, startOfNextFrequency);
-      startOfNextFrequency += secondsValue;
+      oscillator.frequency.setValueAtTime(frequency, startOfNextFrequencyViaAudioCtx);
+      indicateFrequency(frequency, startOfNextFrequencyFromNow);
+      startOfNextFrequencyViaAudioCtx += secondsValue;
+      startOfNextFrequencyFromNow += secondsValue;
     }
   });
 
@@ -159,10 +177,10 @@ function playClick() {
     }
   };
 
-  totalTime = startOfNextFrequency * 1000;
+  totalTime = startOfNextFrequencyViaAudioCtx * 1000;
 
   oscillator.start();
-  oscillator.stop(startOfNextFrequency);
+  oscillator.stop(startOfNextFrequencyViaAudioCtx);
   drawCanvas();
 }
 $('#play').on("click", playClick);
