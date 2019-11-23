@@ -190,6 +190,10 @@ function msToTime(ms, includeHrs, includeMs) {
   );
 }
 
+$('#repeat').on("change", function() {
+  document.cookie = `repeat=${$('#repeat').is(":checked")}`;
+});
+
 $('#seconds').on("change", function() {
   document.cookie = `seconds=${$('#seconds').val()}`;
   $('#stop').click();
@@ -247,6 +251,13 @@ function initializeSeconds() {
   }
 }
 
+function initializeRepeat() {
+  const repeatCookieValue = getCookieValue("repeat");
+  if (repeatCookieValue) {
+    $('#repeat').prop( "checked", true );
+  }
+}
+
 function getCookieValue(cookieName) {
   const cookieValue = document.cookie.replace(
     new RegExp(`(?:(?:^|.*;\\s*)${cookieName}\\s*\\=\\s*([^;]*).*\$)|^.*\$`),
@@ -264,3 +275,4 @@ $(document).ready(initializeTimer);
 $(document).ready(initializeCanvas);
 $(document).ready(initializePresets);
 $(document).ready(initializeSeconds);
+$(document).ready(initializeRepeat);
