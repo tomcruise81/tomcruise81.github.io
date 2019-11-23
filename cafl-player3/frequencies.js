@@ -148,6 +148,8 @@ function stopClick() {
     } catch {}
   }
   audioCtx = undefined;
+  analyser = undefined;
+  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
 
   while (timeouts.length) {
     clearTimeout(timeouts.pop());
