@@ -151,7 +151,10 @@ function playClick() {
   oscillator.onended = function() {
     console.log("onEnded event signled");
     if ($('#repeat').is(":checked")) {
-      playClick();
+      setTimeout(() => {
+        console.log("Repeating");
+        playClick();
+      }, 0);
     } else {
       stopClick();
     }
