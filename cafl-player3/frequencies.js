@@ -120,10 +120,10 @@ $('#play').on("click", function() {
 
   oscillator.onended = function() {
     console.log("onEnded event signled");
-    $('#stop').trigger("click");
-    oscillator = undefined;
     if ($('#repeat').is(":checked")) {
       $('#play').trigger("click");
+    } else {
+      $('#stop').trigger("click");
     }
   };
 
@@ -143,8 +143,11 @@ $('#stop').on("click", function() {
   if (oscillator) {
     try {
       oscillator.stop(0);
+      oscillator = undefined;
     } catch {}
   }
+  audioCtx = undefined;
+
   while (timeouts.length) {
     clearTimeout(timeouts.pop());
   }
