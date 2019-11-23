@@ -86,8 +86,8 @@ function indicateFrequency(frequency, secondsFromNow) {
 function displayTimer() {
   if (totalTime && audioCtx.currentTime && audioCtx.currentTime > 0) {
     const currentTimeMs = audioCtx.currentTime * 1000;
-    $('#elapsed-value').val(msToTime(currentTimeMs));
-    $('#remaining-value').val(msToTime(totalTime - currentTimeMs));
+    $('#elapsed-value').val(msToTime(currentTimeMs, true));
+    $('#remaining-value').val(msToTime(totalTime - currentTimeMs, true));
   } else {
     $('#elapsed-value').val('');
     $('#remaining-value').val('');
@@ -132,6 +132,11 @@ $('#play').on("click", function() {
 });
 
 $('#stop').on("click", function() {
+  if (audioCtx) {
+    try {
+      audioCtx.pause();
+    } catch {}
+  }
   if (oscillator) {
     try {
       oscillator.stop();
