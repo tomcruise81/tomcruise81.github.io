@@ -201,8 +201,10 @@ function stopClick() {
 }
 $('#stop').on("click", () => {
   stopClick();
-  audioCtx.close();
-  audioCtx = undefined;
+  if (audioCtx) {
+    audioCtx.close();
+    audioCtx = undefined;
+  }
 });
 
 $('#presets').on("change", function() {
