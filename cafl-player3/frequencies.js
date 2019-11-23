@@ -132,14 +132,18 @@ function playClick() {
   const secondsValue = parseInt($('#seconds').val());
   let startOfNextFrequency = audioCtx.currentTime;
 
-  const selectedPreset = $("#presets option:selected");
-  const selectedProgram = caflData.programs[selectedPreset.text()];
-  const frequencies = selectedProgram.frequencies;
-  for (let frequency of frequencies) {
-    oscillator.frequency.setValueAtTime(frequency, startOfNextFrequency);
-    indicateFrequency(frequency, startOfNextFrequency);
-    startOfNextFrequency += secondsValue;
-  }
+  const selectedPresets = $("#presets option:selected").map((index, option) => {
+    return option.text;
+  }).get();
+  selectedPresets.forEach((selectedPresetText, index) => {
+    const selectedProgram = caflData.programs[selectedPresetText];
+    const frequencies = selectedProgram.frequencies;
+    for (let frequency of frequencies) {
+      oscillator.frequency.setValueAtTime(frequency, startOfNextFrequency);
+      indicateFrequency(frequency, startOfNextFrequency);
+      startOfNextFrequency += secondsValue;
+    }
+  });
 
   bufferLength = analyser.frequencyBinCount;
   timeDomainDataArray = new Uint8Array(bufferLength);
@@ -178,15 +182,28 @@ $('#stop').on("click", stopClick);
 
 $('#presets').on("change", function() {
   stopClick();
-  const selectedPreset = $("#presets option:selected");
-  if (selectedPreset) {
-    document.cookie = `preset=${selectedPreset.text()}`;
-    const selectedProgram = caflData.programs[selectedPreset.text()];
-    console.log(`Selected preset ${selectedPreset.text()}`);
-    $('#preset-frequencies').val(selectedProgram.frequencies);
-    const commentValue = caflData.programs[selectedPreset.text()].comments;
-    $('#comments').val(commentValue ? commentValue : '');
-  }
+  const selectedPresets = $("#presets option:selected").map((index, option) => {
+    return option.text;
+  }).get();
+  let cookieValue = '';
+  selectedPresets.forEach((selectedPresetText, index) => {
+    const selectedProgram = caflData.programs[selectedPresetText];
+    let frequenciesValue = selectedProgram.frequencies;
+    frequenciesValue = frequenciesValue ? frequenciesValue : 'No Frequencies';
+    let commentValue = selectedProgram.comments;
+    commentValue = commentValue ? commentValue : 'No Comments';
+    console.log(`Selected preset ${selectedPresetText}`);
+    if (index == 0) {
+      cookieValue = `${selectedPresetText}`;
+      $('#preset-frequencies').val(frequenciesValue);
+      $('#comments').val(commentValue);
+    } else {
+      cookieValue += ` | ${selectedPresetText}`;
+      $('#preset-frequencies').val(`${$('#preset-frequencies').val()} | ${frequenciesValue}`);
+      $('#comments').val(`${$('#comments').val()} | ${commentValue}`);
+    }
+    document.cookie = `presets=${cookieValue}`;
+  });
 });
 
 function msToTime(ms, includeHrs, includeMs) {
@@ -227,7 +244,8 @@ function initializeCanvas() {
 }
 
 function initializePresets() {
-    const presetCookieValue = getCookieValue("preset");
+    const presetCookieValue = getCookieValue("presets");
+    const presets = (presetCookieValue) ? presetCookieValue.split(' | ') : [];
     $.ajax({
         url: 'cafl.json',
         cache: true
@@ -239,13 +257,14 @@ function initializePresets() {
                     return {
                         id: index,
                         text: value[0],
-                        selected: (presetCookieValue === value[0])
+                        selected: (presets.includes(value[0]))
                     };
                 });
             }(),
             width: 'resolve',
             dropdownAutoWidth: true,
             placeholder: 'Presets',
+            allowClear: true
         });
 
         $('#presets').change();
