@@ -74,16 +74,10 @@ function terminateAudio() {
   if (oscillator) {
     try {
       oscillator.onended = undefined;
-      try {
-        oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
-      } catch (err) {
-        console.error('Error cancelling oscillator scheduled values');
-        console.error(err);
-        console.error(err.stack);
-      }
+      oscillator.frequency.cancelScheduledValues(audioCtx.currentTime);
       oscillator.stop();
     } catch (err) {
-      console.error('Error stopping oscillator');
+      console.error('Error cleaning up oscillator');
       console.error(err);
       console.error(err.stack);
     }
