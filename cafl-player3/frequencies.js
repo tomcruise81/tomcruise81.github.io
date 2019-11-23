@@ -94,8 +94,8 @@ function displayTimer() {
   }
 }
 
-$('#play').on("click", function() {
-  $('#stop').trigger("click");
+function playClick() {
+  stopClick();
 
   initializeAudio();
 
@@ -121,9 +121,9 @@ $('#play').on("click", function() {
   oscillator.onended = function() {
     console.log("onEnded event signled");
     if ($('#repeat').is(":checked")) {
-      $('#play').trigger("click");
+      playClick();
     } else {
-      $('#stop').trigger("click");
+      stopClick();
     }
   };
 
@@ -132,9 +132,10 @@ $('#play').on("click", function() {
   oscillator.start();
   oscillator.stop(startOfNextFrequency);
   drawCanvas();
-});
+}
+$('#play').on("click", playClick);
 
-$('#stop').on("click", function() {
+function stopClick() {
   if (audioCtx) {
     try {
       audioCtx.suspend();
@@ -156,10 +157,11 @@ $('#stop').on("click", function() {
   $('#remaining-value').val('');
   totalTime = undefined;
   drawCanvas();
-});
+}
+$('#stop').on("click", stopClick);
 
 $('#presets').on("change", function() {
-  $('#stop').click();
+  stopClick();
   const selectedPreset = $("#presets option:selected");
   if (selectedPreset) {
     document.cookie = `preset=${selectedPreset.text()}`;
