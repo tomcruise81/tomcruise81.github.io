@@ -18,6 +18,16 @@ let timeouts = [];
 let caflData;
 let totalTime;
 
+function drawClearCanvas() {
+  if (analyser) {
+    return;
+  }
+
+  requestAnimationFrame(drawClearCanvas);
+
+  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 function drawCanvas() {
   if (!analyser) {
     return;
@@ -60,10 +70,25 @@ function drawCanvas() {
   canvasCtx.stroke();
 }
 
-function initializeAudio() {
+function terminateAudio() {
   if (audioCtx) {
-    audioCtx.close();
+    try {
+      audioCtx.suspend();
+    } catch {}
   }
+  if (oscillator) {
+    try {
+      oscillator.stop(0);
+      oscillator = undefined;
+    } catch {}
+  }
+  audioCtx = undefined;
+  analyser = undefined;
+}
+
+function initializeAudio() {
+  terminateAudio();
+
   // create web audio api context
   audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   analyser = audioCtx.createAnalyser();
@@ -100,7 +125,8 @@ function playClick() {
   initializeAudio();
 
   analyser.fftSize = 1024;
-  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+  drawClearCanvas();
 
   oscillator.type = caflData.defaults.waveform;
   const secondsValue = parseInt($('#seconds').val());
@@ -136,20 +162,9 @@ function playClick() {
 $('#play').on("click", playClick);
 
 function stopClick() {
-  if (audioCtx) {
-    try {
-      audioCtx.suspend();
-    } catch {}
-  }
-  if (oscillator) {
-    try {
-      oscillator.stop(0);
-      oscillator = undefined;
-    } catch {}
-  }
-  audioCtx = undefined;
-  analyser = undefined;
-  canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+  terminateAudio();
+
+  drawClearCanvas();
 
   while (timeouts.length) {
     clearTimeout(timeouts.pop());
@@ -158,7 +173,6 @@ function stopClick() {
   $('#elapsed-value').val('');
   $('#remaining-value').val('');
   totalTime = undefined;
-  drawCanvas();
 }
 $('#stop').on("click", stopClick);
 
