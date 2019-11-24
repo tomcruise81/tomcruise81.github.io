@@ -311,7 +311,7 @@ function initializePresets() {
             width: 'resolve',
             dropdownAutoWidth: true,
             placeholder: 'Presets',
-            // allowClear: true,
+            allowClear: true,
             templateResult: formatPreset
         });
 
