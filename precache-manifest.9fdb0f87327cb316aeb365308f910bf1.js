@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b410e83f292147bfad9501fa41102d2c",
+    "revision": "e4c4af1b9558b6987bbe952e4af50afa",
     "url": "/cafl-player-react/build/index.html"
   },
   {
