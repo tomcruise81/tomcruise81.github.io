@@ -2,7 +2,7 @@
   "name": "cafl-player-react",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://tomcruise81.github.io/cafl-player-angular/build",
+  "homepage": "https://tomcruise81.github.io/cafl-player-react/build",
   "dependencies": {
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
