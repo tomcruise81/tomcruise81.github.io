@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.js": "/cafl-player-react/static/js/main.eca4c99c.chunk.js",
+    "main.js.map": "/cafl-player-react/static/js/main.eca4c99c.chunk.js.map",
+    "runtime-main.js": "/cafl-player-react/static/js/runtime-main.487d2df7.js",
+    "runtime-main.js.map": "/cafl-player-react/static/js/runtime-main.487d2df7.js.map",
+    "static/js/2.56fdfb9f.chunk.js": "/cafl-player-react/static/js/2.56fdfb9f.chunk.js",
+    "static/js/2.56fdfb9f.chunk.js.map": "/cafl-player-react/static/js/2.56fdfb9f.chunk.js.map",
+    "index.html": "/cafl-player-react/index.html",
+    "precache-manifest.15d5e7f5b20616e1be7731e6832c2ecc.js": "/cafl-player-react/precache-manifest.15d5e7f5b20616e1be7731e6832c2ecc.js",
+    "service-worker.js": "/cafl-player-react/service-worker.js"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.487d2df7.js",
+    "static/js/2.56fdfb9f.chunk.js",
+    "static/js/main.eca4c99c.chunk.js"
+  ]
+}
