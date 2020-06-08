@@ -1,0 +1,40 @@
+{
+  "name": "cafl-player-angular",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.10.1",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.55",
+    "autosuggest-highlight": "^3.1.1",
+    "immutable": "^4.0.0-rc.12",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-fade-in": "^0.1.8",
+    "react-scripts": "3.2.0",
+    "react-virtualized": "^9.21.2",
+    "react-window": "^1.8.5",
+    "redux": "^4.0.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
