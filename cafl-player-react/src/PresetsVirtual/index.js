@@ -76,7 +76,12 @@ export default function PresetsVirtual({presetsChangeCallback}) {
     const [open, setOpen] = React.useState(false);
     const [presets, setPresets] = React.useState([]);
     const [selectedPresets, setSelectedPresets] = React.useState(
-        JSON.parse(localStorage.getItem('selectedPresets') || '[]')
+        (() => {
+            const parsedSelectedPresets = JSON.parse(localStorage.getItem('selectedPresets') || '[]');
+            //TODO: Figure out how to get something like this to work
+            //presetsChangeCallback(parsedSelectedPresets);
+            return parsedSelectedPresets;
+        })()
     );
     const loading = open && presets.length === 0;
 

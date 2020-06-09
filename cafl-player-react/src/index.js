@@ -28,7 +28,8 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      presets: [],
+      //TODO: Remove this hideousness
+      presets: JSON.parse(localStorage.getItem('selectedPresets') || '[]'),
       options: {waveform: 'sine', loop: true}
     };
   }
