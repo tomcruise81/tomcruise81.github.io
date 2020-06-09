@@ -74,11 +74,11 @@ const useStyles = makeStyles({
 export default function PresetsVirtual({presetsChangeCallback}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
-    const [options, setOptions] = React.useState([]);
+    const [presets, setPresets] = React.useState([]);
     const [selectedPresets, setSelectedPresets] = React.useState(
         JSON.parse(localStorage.getItem('selectedPresets') || '[]')
     );
-    const loading = open && options.length === 0;
+    const loading = open && presets.length === 0;
 
     React.useEffect(() => {
         localStorage.setItem('selectedPresets', JSON.stringify(selectedPresets));
@@ -93,20 +93,21 @@ export default function PresetsVirtual({presetsChangeCallback}) {
         }
 
         (async () => {
-            let presets = localStorage.getItem('presets');
-            if (!presets) {
+            let presetsFromLocalStorage = localStorage.getItem('presets');
+            if (!presetsFromLocalStorage) {
                 const response = await fetch(`${process.env.PUBLIC_URL}/cafl.json`);
-                presets = await response.json();
-                localStorage.setItem('presets', JSON.stringify(presets));
-            } else {
-                presets = JSON.parse(presets);
+                let presetsFromRemote = await response.json();
+                localStorage.setItem('presets', JSON.stringify(presetsFromRemote));
+                presetsFromLocalStorage = localStorage.getItem('presets');
             }
 
+            let parsedPresets = JSON.parse(presetsFromLocalStorage);
+
             if (active) {
-                setOptions(
-                    Object.keys(presets.programs).map(
+                setPresets(
+                    Object.keys(parsedPresets.programs).map(
                         key => {
-                            let preset = presets.programs[key];
+                            let preset = parsedPresets.programs[key];
                             let name = key;
                             if (!preset.comments) {
                                 preset.comments = "None";
@@ -114,7 +115,7 @@ export default function PresetsVirtual({presetsChangeCallback}) {
                             if (!preset.frequencies) {
                                 preset.frequencies = [];
                             }
-                            return { name: name, ...presets.programs[key] }
+                            return { name: name, ...parsedPresets.programs[key] }
                         }
                     )
                 );
@@ -149,20 +150,20 @@ export default function PresetsVirtual({presetsChangeCallback}) {
                 setSelectedPresets(values)
                 presetsChangeCallback(values);
             }}
-            getOptionLabel={option => option.name}
+            getOptionLabel={preset => preset.name}
             filterSelectedOptions
             filterOptions={
-                (options, state) => {
-                    if (options.length > 0) {
+                (allPresets, state) => {
+                    if (allPresets.length > 0) {
                         const label = state.inputValue.toLowerCase();
-                        const filteredOptions = options.filter(option => {
-                            if (option.name.toLowerCase().includes(label) ||
-                                (option.comments && option.comments.toLowerCase().includes(label))) {
+                        const filteredPresets = allPresets.filter(preset => {
+                            if (preset.name.toLowerCase().includes(label) ||
+                                (preset.comments && preset.comments.toLowerCase().includes(label))) {
                                 return true;
                             }
                             return false;
                         });
-                        return filteredOptions;
+                        return filteredPresets;
                     }
                     return [];
                 }
@@ -174,7 +175,7 @@ export default function PresetsVirtual({presetsChangeCallback}) {
             ListboxComponent={ListboxComponent}
             freeSolo
             autoHighlight
-            options={options}
+            options={presets}
             loading={loading}
             renderInput={params => (
                 <TextField
