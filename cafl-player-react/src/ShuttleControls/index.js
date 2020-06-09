@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import PlayIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
+// import PauseIcon from '@material-ui/icons/Pause';
+import StopIcon from '@material-ui/icons/Stop';
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -169,8 +170,11 @@ export default function ShuttleControls({ presets, options }) {
                     <PlayIcon />
                 </Fab>
                 :
-                <Fab aria-label="Pause" className={classes.fab} color="secondary" onClick={handlePlaying}>
+                /* <Fab aria-label="Pause" className={classes.fab} color="secondary" onClick={handlePlaying}>
                     <PauseIcon />
+                </Fab> */
+                <Fab aria-label="Stop" className={classes.fab} color="secondary" onClick={handlePlaying}>
+                    <StopIcon />
                 </Fab>
             }
         </div>
