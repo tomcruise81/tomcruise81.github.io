@@ -71,7 +71,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function PresetsVirtual() {
+export default function PresetsVirtual({presetsChangeCallback}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
@@ -136,6 +136,9 @@ export default function PresetsVirtual() {
             }}
             onClose={() => {
                 setOpen(false);
+            }}
+            onChange={(_, values) => {
+                presetsChangeCallback(values);
             }}
             getOptionLabel={option => option.name}
             filterSelectedOptions

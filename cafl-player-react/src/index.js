@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Grid from '@material-ui/core/Grid';
 // import Paper from '@material-ui/core/Paper';
 import OptionsToggle from './OptionsToggle';
-import Presets from './Presets';
+// import Presets from './Presets';
 import PresetsVirtual from './PresetsVirtual';
 // import PresetsVirtual2 from './PresetsVirtual2';
 // import PresetsVirtualList from './PresetsVirtualList';
@@ -22,7 +22,26 @@ const theme = createMuiTheme({
 });
 
 class Player extends React.Component {
+  // const [frequencies, setFrequencies] = React.useState(true);
+  // const [options, setOptions] = React.useState([]);
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      presets: [],
+      options: {waveform: 'sine', loop: true}
+    };
+  }
+
   render() {
+    const presetsChangeCallback = (presets) => {
+      this.setState({ presets: (presets) ? presets : [] });
+    }
+
+    const optionsChangeCallback = (options) => {
+      this.setState({ options: options });
+    }
+
     return (
       <div className={theme.root}>
         <Grid container spacing={3}>
@@ -30,7 +49,7 @@ class Player extends React.Component {
             <Presets />
           </Grid> */}
           <Grid item xs={12}>
-            <PresetsVirtual />
+            <PresetsVirtual presetsChangeCallback={presetsChangeCallback} />
           </Grid>
           {/* <Grid item xs={12} sm={6}>
             <PresetsVirtual2 />
@@ -39,10 +58,10 @@ class Player extends React.Component {
             <PresetsVirtualList />
           </Grid> */}
           <Grid item xs={12} sm={6}>
-            <OptionsToggle />
+            <OptionsToggle optionsChangeCallback={optionsChangeCallback} />
           </Grid>
           <Grid item xs={12}>
-            <ShuttleControls />
+            <ShuttleControls presets={this.state.presets} options={this.state.options} />
           </Grid>
         </Grid>
       </div>

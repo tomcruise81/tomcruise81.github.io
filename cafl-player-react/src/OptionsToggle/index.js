@@ -37,12 +37,13 @@ const StyledToggleButtonGroup = withStyles(theme => ({
   },
 }))(ToggleButtonGroup);
 
-export default function OptionsToggle() {
+export default function OptionsToggle({optionsChangeCallback}) {
   const [waveform, setWaveform] = React.useState('sine');
   const [loop, setShouldLoop] = React.useState(true);
 
   const handleWaveform = (_, newWaveform) => {
     setWaveform(newWaveform);
+    optionsChangeCallback({waveform: newWaveform, loop: loop});
   };
 
   const classes = useStyles();
@@ -79,6 +80,7 @@ export default function OptionsToggle() {
             selected={loop}
             onClick={() => {
               setShouldLoop(!loop);
+              optionsChangeCallback({waveform: waveform, loop: !loop});
             }}
             aria-label="loop audio">
             <LoopIcon />
