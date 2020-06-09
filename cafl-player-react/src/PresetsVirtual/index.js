@@ -75,7 +75,14 @@ export default function PresetsVirtual({presetsChangeCallback}) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
+    const [savedValues, setSavedValues] = React.useState(
+        JSON.parse(localStorage.getItem('presetValuesInLocalStorage') || '[]')
+    );
     const loading = open && options.length === 0;
+
+    React.useEffect(() => {
+        localStorage.setItem('presetValuesInLocalStorage', JSON.stringify(savedValues));
+    }, [savedValues]);
 
     React.useEffect(() => {
         let active = true;
@@ -137,7 +144,9 @@ export default function PresetsVirtual({presetsChangeCallback}) {
             onClose={() => {
                 setOpen(false);
             }}
+            value={savedValues}
             onChange={(_, values) => {
+                setSavedValues(values)
                 presetsChangeCallback(values);
             }}
             getOptionLabel={option => option.name}
