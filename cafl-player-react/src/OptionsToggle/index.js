@@ -42,7 +42,9 @@ export default function OptionsToggle({optionsChangeCallback}) {
   const [loop, setShouldLoop] = React.useState(true);
 
   const handleWaveform = (_, newWaveform) => {
-    setWaveform(newWaveform);
+    if (newWaveform !== null) {
+      setWaveform(newWaveform);
+    }
     optionsChangeCallback({waveform: newWaveform, loop: loop});
   };
 
