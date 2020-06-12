@@ -7,6 +7,7 @@ import SineWaveIcon from '../SineWaveIcon';
 import LoopIcon from '@material-ui/icons/Loop';
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
+import Tooltip from '@material-ui/core/Tooltip';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
@@ -37,7 +38,7 @@ const StyledToggleButtonGroup = withStyles(theme => ({
   },
 }))(ToggleButtonGroup);
 
-export default function OptionsToggle({optionsChangeCallback}) {
+export default function OptionsToggle({ optionsChangeCallback }) {
   const [waveform, setWaveform] = React.useState('sine');
   const [loop, setShouldLoop] = React.useState(true);
 
@@ -45,7 +46,7 @@ export default function OptionsToggle({optionsChangeCallback}) {
     if (newWaveform !== null) {
       setWaveform(newWaveform);
     }
-    optionsChangeCallback({waveform: newWaveform, loop: loop});
+    optionsChangeCallback({ waveform: newWaveform, loop: loop });
   };
 
   const classes = useStyles();
@@ -60,33 +61,43 @@ export default function OptionsToggle({optionsChangeCallback}) {
           onChange={handleWaveform}
           aria-label="waveform"
         >
-          <ToggleButton value="square" aria-label="square waves">
-            <SquareWaveIcon />
-          </ToggleButton>
-          <ToggleButton value="triangle" aria-label="triangle waves">
-            <TriangleWaveIcon />
-          </ToggleButton>
-          <ToggleButton value="sawtooth" aria-label="sawtooth waves">
-            <SawtoothWaveIcon />
-          </ToggleButton>
-          <ToggleButton value="sine" aria-label="sine waves">
-            <SineWaveIcon />
-          </ToggleButton>
+          <Tooltip title="square waves">
+            <ToggleButton value="square" aria-label="square waves">
+              <SquareWaveIcon />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="triangle waves">
+            <ToggleButton value="triangle" aria-label="triangle waves">
+              <TriangleWaveIcon />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="sawtooth waves">
+            <ToggleButton value="sawtooth" aria-label="sawtooth waves">
+              <SawtoothWaveIcon />
+            </ToggleButton>
+          </Tooltip>
+          <Tooltip title="sine waves">
+            <ToggleButton value="sine" aria-label="sine waves">
+              <SineWaveIcon />
+            </ToggleButton>
+          </Tooltip>
         </StyledToggleButtonGroup>
         <Divider orientation="vertical" className={classes.divider} />
         <StyledToggleButtonGroup
           size="small"
           arial-label="text formatting"
         >
-          <ToggleButton value="loop"
-            selected={loop}
-            onClick={() => {
-              setShouldLoop(!loop);
-              optionsChangeCallback({waveform: waveform, loop: !loop});
-            }}
-            aria-label="loop audio">
-            <LoopIcon />
-          </ToggleButton>
+          <Tooltip title="loop audio">
+            <ToggleButton value="loop"
+              selected={loop}
+              onClick={() => {
+                setShouldLoop(!loop);
+                optionsChangeCallback({ waveform: waveform, loop: !loop });
+              }}
+              aria-label="loop audio">
+              <LoopIcon />
+            </ToggleButton>
+          </Tooltip>
         </StyledToggleButtonGroup>
       </Paper>
     </div>
