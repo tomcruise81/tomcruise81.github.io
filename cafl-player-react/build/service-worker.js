@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/cafl-player-react/build/precache-manifest.0cc9841061c25aebff33d737df928d3f.js"
+  "/cafl-player-react/build/precache-manifest.46123308050923619b1a895ca95ca2d7.js"
 );
 
 self.addEventListener('message', (event) => {
