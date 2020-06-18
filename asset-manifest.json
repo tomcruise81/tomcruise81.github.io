@@ -1,23 +1,18 @@
 {
   "files": {
-    "main.js": "/cafl-player-react/build/static/js/main.a77f0dcc.chunk.js",
-    "main.js.map": "/cafl-player-react/build/static/js/main.a77f0dcc.chunk.js.map",
+    "main.js": "/cafl-player-react/build/static/js/main.0d42214e.chunk.js",
+    "main.js.map": "/cafl-player-react/build/static/js/main.0d42214e.chunk.js.map",
     "runtime-main.js": "/cafl-player-react/build/static/js/runtime-main.2f5ee007.js",
     "runtime-main.js.map": "/cafl-player-react/build/static/js/runtime-main.2f5ee007.js.map",
-    "static/js/2.1705d225.chunk.js": "/cafl-player-react/build/static/js/2.1705d225.chunk.js",
-    "static/js/2.1705d225.chunk.js.map": "/cafl-player-react/build/static/js/2.1705d225.chunk.js.map",
+    "static/js/2.fd6cafcf.chunk.js": "/cafl-player-react/build/static/js/2.fd6cafcf.chunk.js",
+    "static/js/2.fd6cafcf.chunk.js.map": "/cafl-player-react/build/static/js/2.fd6cafcf.chunk.js.map",
     "index.html": "/cafl-player-react/build/index.html",
-    "precache-manifest.7a88643cc932df0c197fdc7923e428a9.js": "/cafl-player-react/build/precache-manifest.7a88643cc932df0c197fdc7923e428a9.js",
-    "service-worker.js": "/cafl-player-react/build/service-worker.js",
-    "static/media/common-vertex.shader": "/cafl-player-react/build/static/media/common-vertex.5e838e7b.shader",
-    "static/media/frequency-fragment.shader": "/cafl-player-react/build/static/media/frequency-fragment.a9bc450e.shader",
-    "static/media/sonogram-fragment.shader": "/cafl-player-react/build/static/media/sonogram-fragment.ff3e2717.shader",
-    "static/media/sonogram-vertex.shader": "/cafl-player-react/build/static/media/sonogram-vertex.66fd52b4.shader",
-    "static/media/waveform-fragment.shader": "/cafl-player-react/build/static/media/waveform-fragment.cab01b30.shader"
+    "precache-manifest.2edb2a20f07865c655a78ff3b6c631ff.js": "/cafl-player-react/build/precache-manifest.2edb2a20f07865c655a78ff3b6c631ff.js",
+    "service-worker.js": "/cafl-player-react/build/service-worker.js"
   },
   "entrypoints": [
     "static/js/runtime-main.2f5ee007.js",
-    "static/js/2.1705d225.chunk.js",
-    "static/js/main.a77f0dcc.chunk.js"
+    "static/js/2.fd6cafcf.chunk.js",
+    "static/js/main.0d42214e.chunk.js"
   ]
 }
