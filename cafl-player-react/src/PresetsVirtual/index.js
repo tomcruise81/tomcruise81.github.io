@@ -98,15 +98,12 @@ export default function PresetsVirtual({presetsChangeCallback}) {
         }
 
         (async () => {
-            let presetsFromLocalStorage = localStorage.getItem('presets');
-            if (!presetsFromLocalStorage) {
-                const response = await fetch(`${process.env.PUBLIC_URL}/cafl.json`);
-                let presetsFromRemote = await response.json();
-                localStorage.setItem('presets', JSON.stringify(presetsFromRemote));
-                presetsFromLocalStorage = localStorage.getItem('presets');
-            }
+            // Cleanup (if necessary)
+            localStorage.removeItem('presets');
 
-            let parsedPresets = JSON.parse(presetsFromLocalStorage);
+            const request = new Request(`${process.env.PUBLIC_URL}/cafl.json`, {method: 'GET', cache: 'no-cache'});
+            const response = await fetch(request);
+            const parsedPresets = await response.json();
 
             if (active) {
                 setPresets(

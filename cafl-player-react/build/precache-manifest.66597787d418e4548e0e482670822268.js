@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "22be5106d012a2bfa4018a5f187dfcdb",
+    "revision": "ced796c6ada522be0ef7ea66b62e5887",
     "url": "/cafl-player-react/build/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cafl-player-react/build/static/js/2.fd6cafcf.chunk.js"
   },
   {
-    "revision": "63d9638fe861f7705f1e",
-    "url": "/cafl-player-react/build/static/js/main.0d42214e.chunk.js"
+    "revision": "94a011a44feca45bf40f",
+    "url": "/cafl-player-react/build/static/js/main.375939d4.chunk.js"
   },
   {
     "revision": "cf2a9f5513bfd1c2ad2f",
