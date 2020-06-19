@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/cafl-player-react/build/static/js/main.93681fa5.chunk.js",
-    "main.js.map": "/cafl-player-react/build/static/js/main.93681fa5.chunk.js.map",
+    "main.js": "/cafl-player-react/build/static/js/main.375939d4.chunk.js",
+    "main.js.map": "/cafl-player-react/build/static/js/main.375939d4.chunk.js.map",
     "runtime-main.js": "/cafl-player-react/build/static/js/runtime-main.2f5ee007.js",
     "runtime-main.js.map": "/cafl-player-react/build/static/js/runtime-main.2f5ee007.js.map",
     "static/js/2.fd6cafcf.chunk.js": "/cafl-player-react/build/static/js/2.fd6cafcf.chunk.js",
     "static/js/2.fd6cafcf.chunk.js.map": "/cafl-player-react/build/static/js/2.fd6cafcf.chunk.js.map",
     "index.html": "/cafl-player-react/build/index.html",
-    "precache-manifest.fea1057d0650f8a399705cb9131cd9c9.js": "/cafl-player-react/build/precache-manifest.fea1057d0650f8a399705cb9131cd9c9.js",
+    "precache-manifest.66597787d418e4548e0e482670822268.js": "/cafl-player-react/build/precache-manifest.66597787d418e4548e0e482670822268.js",
     "service-worker.js": "/cafl-player-react/build/service-worker.js"
   },
   "entrypoints": [
     "static/js/runtime-main.2f5ee007.js",
     "static/js/2.fd6cafcf.chunk.js",
-    "static/js/main.93681fa5.chunk.js"
+    "static/js/main.375939d4.chunk.js"
   ]
 }
