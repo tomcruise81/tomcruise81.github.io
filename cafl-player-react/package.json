@@ -10,6 +10,7 @@
     "autosuggest-highlight": "^3.1.1",
     "gh-pages": "^3.0.0",
     "immutable": "^4.0.0-rc.12",
+    "nosleep.js": "^0.11.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-fade-in": "^0.1.8",

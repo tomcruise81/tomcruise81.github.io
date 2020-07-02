@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 // import PauseIcon from '@material-ui/icons/Pause';
 import StopIcon from '@material-ui/icons/Stop';
+import NoSleep from 'nosleep.js';
 
 const useStyles = makeStyles(theme => ({
     fab: {
@@ -19,6 +20,7 @@ export default function ShuttleControls({ presets, options }) {
     const [playing, setPlaying] = React.useState(false);
     const oscillator = React.useRef(null);
     const audioCtx = React.useRef(null);
+    const noSleep = React.useRef(null);
     // const polySynth = React.useRef(null);
     // const sequence = React.useRef(null);
 
@@ -45,8 +47,14 @@ export default function ShuttleControls({ presets, options }) {
                 // console.error(err.stack);
             }
         }
-
         oscillator.current = undefined;
+
+        if (noSleep.current) {
+            noSleep.disable();
+            console.log("noSleep disabled");
+        }
+        noSleep.current = undefined;
+
         analyser = undefined;
         // WARNING: Don't terminate the audioCtx, since doing so prevents repeats and requires a new button click
         // audioCtx.current = undefined;
@@ -67,6 +75,10 @@ export default function ShuttleControls({ presets, options }) {
 
         oscillator.current.connect(analyser);
         analyser.connect(audioCtx.current.destination);
+
+        noSleep.current = new NoSleep();
+        noSleep.current.enable();
+        console.log("noSleep enabled");
     }
 
     function indicateFrequency(frequency, secondsFromNow) {
