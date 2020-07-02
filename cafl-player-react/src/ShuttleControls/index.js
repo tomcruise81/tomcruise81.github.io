@@ -21,17 +21,18 @@ export default function ShuttleControls({ presets, options }) {
     const oscillator = React.useRef(null);
     const audioCtx = React.useRef(null);
     const noSleep = React.useRef(null);
+    const currentFrequency = React.useRef(null);
+    const totalTime = React.useRef(null);
+    const analyser = React.useRef(null);
+    const timeDomainDataArray = React.useRef(null);
+    const timeouts = React.useRef([]);
     // const polySynth = React.useRef(null);
     // const sequence = React.useRef(null);
 
     const secToMs = 1000;
-    let playClickedTimeMs = 0;
-    let analyser;
-    let bufferLength;
-    let timeDomainDataArray;
-    let currentFrequency;
-    let timeouts = [];
-    let totalTime;
+    // let playClickedTimeMs = 0;
+    // let bufferLength;
+    // let timeouts = [];
 
     function terminateAudio() {
         if (oscillator.current) {
@@ -50,12 +51,12 @@ export default function ShuttleControls({ presets, options }) {
         oscillator.current = undefined;
 
         if (noSleep.current) {
-            noSleep.disable();
+            noSleep.current.disable();
             console.log("noSleep disabled");
         }
         noSleep.current = undefined;
 
-        analyser = undefined;
+        analyser.current = undefined;
         // WARNING: Don't terminate the audioCtx, since doing so prevents repeats and requires a new button click
         // audioCtx.current = undefined;
     }
@@ -68,13 +69,13 @@ export default function ShuttleControls({ presets, options }) {
         // audioCtx.current.onstatechange = function () {
         //     console.log(`Audio Context State: ${audioCtx.current.state}`);
         // };
-        analyser = audioCtx.current.createAnalyser();
+        analyser.current = audioCtx.current.createAnalyser();
 
         // create Oscillator node
         oscillator.current = audioCtx.current.createOscillator();
 
-        oscillator.current.connect(analyser);
-        analyser.connect(audioCtx.current.destination);
+        oscillator.current.connect(analyser.current);
+        analyser.current.connect(audioCtx.current.destination);
 
         noSleep.current = new NoSleep();
         noSleep.current.enable();
@@ -82,9 +83,9 @@ export default function ShuttleControls({ presets, options }) {
     }
 
     function indicateFrequency(frequency, secondsFromNow) {
-        timeouts.push(
+        timeouts.current.push(
             setTimeout(() => {
-                currentFrequency = frequency;
+                currentFrequency.current = frequency;
             }, secondsFromNow * secToMs)
         );
     }
@@ -94,7 +95,7 @@ export default function ShuttleControls({ presets, options }) {
 
         initializeAudio();
 
-        analyser.fftSize = 1024;
+        analyser.current.fftSize = 1024;
 
         // drawClearCanvas();
 
@@ -118,8 +119,8 @@ export default function ShuttleControls({ presets, options }) {
             startOfNextFrequencyFromNow += secondsValue;
         }
 
-        bufferLength = analyser.frequencyBinCount;
-        timeDomainDataArray = new Uint8Array(bufferLength);
+        let bufferLength = analyser.current.frequencyBinCount;
+        timeDomainDataArray.current = new Uint8Array(bufferLength);
 
         oscillator.current.onended = function () {
             console.log("onEnded event signled");
@@ -133,7 +134,7 @@ export default function ShuttleControls({ presets, options }) {
             }
         };
 
-        totalTime = startOfNextFrequencyFromNow * 1000;
+        totalTime.current = startOfNextFrequencyFromNow * 1000;
 
         oscillator.current.start();
         oscillator.current.stop(startOfNextFrequencyViaAudioCtx);
@@ -145,19 +146,19 @@ export default function ShuttleControls({ presets, options }) {
 
         // drawClearCanvas();
 
-        while (timeouts.length) {
-            clearTimeout(timeouts.pop());
+        while (timeouts.current.length) {
+            clearTimeout(timeouts.current.pop());
         }
         indicateFrequency(0, 0);
         // $('#elapsed-value').val('');
         // $('#remaining-value').val('');
-        totalTime = undefined;
+        totalTime.current = undefined;
     }
 
     function handlePlaying() {
         const isPlay = !playing && presets.length > 0;
         if (isPlay) {
-            playClickedTimeMs = new Date().getTime();
+            // playClickedTimeMs = new Date().getTime();
             stopClick();
             if (audioCtx.current) {
               audioCtx.current.close();
